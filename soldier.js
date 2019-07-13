@@ -1,6 +1,12 @@
 class Soldier {
-    constructor(initialX) {
+    constructor(initialX, initialY, width, height) {
         this.x = initialX;
+        this.y = initialY;
+        this.width = width;
+        this.height = height;
+        this.speed = 1;
+
+
     }
 
     // movingDistance() {
@@ -11,7 +17,7 @@ class Soldier {
     // }
 
     move() {
-        this.x = this.x + 1;
+        this.x = this.x + this.speed;
     }
 
     draw() {
@@ -24,7 +30,7 @@ class Soldier {
         ctx.strokeStyle = "#000000"
         ctx.fillStyle = "#13f1c3"
 
-        ctx.rect(this.x, 700, 50, 80);
+        ctx.rect(this.x, this.y, this.width, this.height);
         ctx.fill()
         ctx.stroke()
     }
