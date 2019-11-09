@@ -41,6 +41,29 @@ function clearCanvas() {
 }
 
 function processData() {
+    var alliesBattleLine = 0
+    var enemyBattleLine = canvasWidth
+    var battleLine
+    //確認友軍最遠預判座標(X+寬+下次移動距離)
+    for (let index = 0; index < alliesSoldierList.length; index++) {
+        let PredictedPosition = alliesSoldierList[index].speed + alliesSoldierList[index].x + alliesSoldierList[index].width;
+        if (PredictedPosition > alliesBattleLine) {
+            alliesBattleLine = PredictedPosition;
+        }
+    }
+    //確認敵軍最遠預判座標(X+下次移動距離)
+    for (let index = 0; index < enemySoldierList.length; index++) {
+        let PredictedPosition = enemySoldierList[index].speed + enemySoldierList[index].x;
+        if (PredictedPosition < enemyBattleLine) {
+            enemyBattleLine = PredictedPosition;
+        }
+    }
+    //比較雙方戰線位置
+    if (enemyBattleLine < alliesBattleLine) {
+        //戰線重疊，取中點
+        battleLine = (enemyBattleLine + alliesBattleLine) / 2;
+    }
+
     //移動士兵
     for (let index = 0; index < alliesSoldierList.length; index++) {
         alliesSoldierList[index].move();
@@ -75,8 +98,6 @@ function processData() {
     if (time % 50 == 0) {
         rightSoldier();
     }
-    //短兵相接
-
 
 
 
