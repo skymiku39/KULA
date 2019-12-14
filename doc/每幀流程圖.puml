@@ -1,0 +1,33 @@
+@startuml 每幀流程圖
+
+start
+:處理使用者輸入;
+	note right 
+    	1. 新增士兵
+    	2. 發動技能
+    	3. 控制英雄移動、攻擊
+	end note
+if (死亡模式) then (yes)
+elseif (攻擊模式) then (yes)
+	:執行攻擊;
+	note right
+		*任何一幀都在下列狀態中的其一
+		條件：敵人在攻擊範圍內
+		1. 動畫中
+		2. 命中判定	
+	end note
+elseif (移動模式) then (yes)
+	:執行移動;
+	note right 
+		1.移動
+		2.判定移動後的角色
+		  攻擊範圍內是否有敵人
+	end note
+else
+	:例外狀況;
+	stop
+endif
+	:畫圖;
+stop
+
+@enduml
